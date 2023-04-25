@@ -1,0 +1,25 @@
+@import './src/scss/layout/mixins';
+.note-username {
+  color: white;
+  .title {
+    font-weight: 600;
+    font-size: toRem(16);
+  }
+  .content {
+    font-size: toRem(12);
+  }
+}
+.agree {
+  font-size: toRem(12);
+}
+
+label {
+  font-weight: 500;
+  font-size: toRem(14);
+}
+small {
+  font-size: toRem(11);
+}
+.cur-pointer {
+  cursor: pointer;
+}

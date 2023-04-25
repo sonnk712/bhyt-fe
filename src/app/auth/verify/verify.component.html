@@ -1,0 +1,187 @@
+<div class="profile p-grid">
+    <div class="p-lg-10 p-lg-offset-1 p-col-12 p-offset-0">
+      <h3 class="p-text-center title">THÔNG TIN CÁ NHÂN</h3>
+      <p-card>
+        <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+        <form class="p-fluid" [formGroup]="formVerify">
+          <div class="p-grid">
+            <div class="p-md-6 p-lg-6">
+              <div class="p-fluid">
+                <p>Thông tin cá nhân</p>
+                <div class="space-line"></div>
+              </div>
+            </div>
+  
+          </div>
+          <div class="p-grid">
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="full-name"><span class="character-require">* </span>Họ và tên</label>
+                  <input id="full-name" formControlName="name" type="text" [readOnly]="accountInfo && accountInfo.update" pInputText placeholder="Nhập họ và tên"/>
+                  <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                    Họ và tên không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="verify-num"><span class="character-require">* </span>Số CMND / CCCD / HC</label>
+                  <input id="verify-num" type="text" formControlName="identityNumber" pInputText maxlength="20"
+                         placeholder="Nhập số CMND / CCCD / HC"/>
+                  <small *ngIf="hasErrorInput('identityNumber', 'required')" class="p-error">
+                    CMND / CCCD / HC không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+          <!-- </div>
+  
+          <div class="p-grid"> -->
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label><span class="character-require">* </span>Giới tính</label>
+                  <div class="p-fluid p-grid">
+                    <div class="p-md-3 p-pt-3 p-field-radiobutton">
+                      <p-radioButton name="gender" value="M" formControlName="gender" inputId="male"></p-radioButton>
+                      <label for="male">Nam</label>
+                    </div>
+                    <div class="p-md-3 p-pt-3 p-field-radiobutton">
+                      <p-radioButton name="gender" value="F" formControlName="gender" inputId="female"></p-radioButton>
+                      <label for="female">Nữ</label>
+                    </div>
+                  </div>
+                  <small *ngIf="hasErrorInput('gender', 'required')" class="p-error">
+                    Giới tính không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="issue-date"><span class="character-require">* </span>Ngày cấp</label>
+                  <p-calendar
+                    inputId="basic"
+                    formControlName="issuerDate"
+                    dateFormat="dd/mm/yy"
+                    (onInput)="onInputDate($event, posDate.ISSUE_DATE)"
+                    [showIcon]="true"
+                    [showOnFocus]="false"
+                    (onSelect)="onSelectIssueDate($event)"
+                    placeholder="dd/mm/yyyy">
+                  </p-calendar>
+                  <small *ngIf="hasErrorInput('issuerDate', 'required')" class="p-error">
+                    Ngày cấp không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+          <!-- </div>
+  
+          <div class="p-grid"> -->
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="date-of-birth"><span class="character-require">* </span>Ngày sinh</label>
+                  <p-calendar
+                    inputId="basic"
+                    formControlName="birthday"
+                    dateFormat="dd/mm/yy"
+                    (onInput)="onInputDate($event, posDate.BIRTHDAY)"
+                    [showIcon]="true"
+                    [showOnFocus]="false"
+                    (onSelect)="onSelectBirthDay($event)"
+                    placeholder="dd/mm/yyyy">
+                  </p-calendar>
+                  <small *ngIf="hasErrorInput('birthday', 'required')" class="p-error">
+                    Ngày sinh không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="issue-by"><span class="character-require">* </span>Nơi cấp</label>
+                  <input id="issue-by" type="text" formControlName="issuerBy" pInputText placeholder="Nhập nơi cấp "/>
+                  <small *ngIf="hasErrorInput('issuerBy', 'required')" class="p-error">
+                    Nơi cấp không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+          <!-- </div>
+  
+          <div class="p-grid"> -->
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="resident-address"><span class="character-require">* </span>Địa chỉ thường trú:</label>
+                  <input id="resident-address" type="text" formControlName="permanentAddress" pInputText
+                         placeholder="Nhập địa chỉ thường trú"/>
+                  <small *ngIf="hasErrorInput('permanentAddress', 'required')" class="p-error">
+                    Địa chỉ thường trú không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="current-address"><span class="character-require">* </span>Địa chỉ hiện tại:</label>
+                  <input id="current-address" type="text" formControlName="currentAddress" pInputText
+                         placeholder="Nhập địa chỉ hiện tại "/>
+                  <small *ngIf="hasErrorInput('permanentAddress', 'required')" class="p-error">
+                    Địa chỉ hiện tại không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+         
+  
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="country"><span class="character-require">* </span>Quốc gia</label>
+                  <input id="country" type="text" formControlName="country" pInputText placeholder="Nhập Quốc gia"/>
+                  <small *ngIf="hasErrorInput('country', 'country')" class="p-error">
+                    Quốc gia không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-grid">
+            <div class="p-col-12 p-md-6 p-lg-6">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <label for="otp"><span class="character-require">* </span>OTP:</label>
+                  <input id="otp" type="text" formControlName="otp" pInputText placeholder="Nhập OTP"/>
+                  <small *ngIf="hasErrorInput('otp', 'otp')" class="p-error">
+                    OTP không được bỏ trống
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-grid">
+            <div class="p-col-12 p-md-offset-5 p-md-2 p-lg-offset-5 p-lg-2">
+              <div class="p-fluid p-grid">
+                <div class="p-col-12 p-field">
+                  <button pButton type="button" label="Cập nhật" class="p-button-success" (click)="updateInfo()"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+  

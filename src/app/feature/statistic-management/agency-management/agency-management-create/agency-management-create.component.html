@@ -1,0 +1,141 @@
+<div class="p-lg-12 p-md-12 p-col-12 p-m-auto">
+  <h5 class="p-text-center p-my-5">THÊM MỚI ĐẠI LÝ</h5>
+  <p-card>
+    <form class="p-fluid" [formGroup]="formCreateAgency">
+
+      <div class="p-grid p-mb-3">
+        <div class="p-md-6 p-lg-6">
+          <p>Thông tin đại lý</p>
+          <div class="space-line"></div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="code"><span class="character-require">* </span>Mã đại lý</label>
+              <input id="code" formControlName="code" type="text" pInputText placeholder="Nhập mã đại lý" />
+              <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                Mã đại lý không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="name"><span class="character-require">* </span>Tên đại lý</label>
+              <input id="name" formControlName="name" type="text" pInputText placeholder="Nhập tên đại lý" />
+              <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                Tên đại lý không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="receivingPlace"><span class="character-require">* </span>Điểm thu</label>
+              <input id="receivingPlace" formControlName="receivingPlace" type="text" pInputText placeholder="Nhập điểm thu" />
+              <small *ngIf="hasErrorInput('receivingPlace', 'required')" class="p-error">
+                Điểm thu số thuế không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="person"><span class="character-require">* </span>Tên người quản lý</label>
+              <input id="person" formControlName="person" type="text" pInputText placeholder="Nhập tên người quản lý" />
+              <small *ngIf="hasErrorInput('person', 'required')" class="p-error">
+                Tên người quản lý không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+       
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Tỉnh / Thành phố</label>
+              <p-dropdown formControlName="provinceList" [options]="cities" optionLabel="name" [showClear]="true"
+                placeholder="Chọn Tỉnh / Thành phố" (onChange)="getDistrictFromCities()"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Quận / Huyện</label>
+              <p-dropdown formControlName="districtList" [options]="districts" optionLabel="name" [showClear]="true"
+                placeholder="Chọn Quận / Huyện" (onChange)="getWardFromDistricts()"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Xã / Phường</label>
+              <p-dropdown formControlName="wardList" [options]="wards" optionLabel="name" [showClear]="true"
+                placeholder="Chọn Xã / Phường"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="address"><span class="character-require">* </span>Địa chỉ cụ thể</label>
+              <input id="address" formControlName="address" type="text" pInputText placeholder="Nhập địa chỉ cụ thể" />
+              <small *ngIf="hasErrorInput('address', 'required')" class="p-error">
+                Địa chỉ cụ thể không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="phoneNumber"><span class="character-require">* </span>Số điện thoại</label>
+              <input id="phoneNumber" formControlName="phoneNumber" type="text" pInputText placeholder="Nhập số điện thoại" />
+              <small *ngIf="hasErrorInput('phoneNumber', 'required')" class="p-error">
+                Số điện thoại không được bỏ trống
+              </small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <div class="p-mb-3 p-text-center">
+      <button pButton pRipple type="button" label="Lưu thông tin" class="p-button-info"
+        (click)="createAgency()"></button>
+    </div>
+  </p-card>
+</div>

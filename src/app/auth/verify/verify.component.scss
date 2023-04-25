@@ -1,0 +1,100 @@
+@import './src/scss/layout/mixins';
+:host {
+  ::ng-deep .p-card {
+    .p-card-body {
+      padding: 2rem 2rem;
+    }
+  }
+  ::ng-deep .p-field {
+    margin-bottom: 0.1rem;
+    label {
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+
+  ::ng-deep .p-datepicker-trigger {
+    background: #A51739;
+    border: 1px solid #A51739;
+  }
+
+  ::ng-deep .p-datepicker-trigger:enabled:active .p-datepicker-trigger:enabled:hover {
+    background: #A51739;
+    border: 1px solid #A51739;
+  }
+
+  ::ng-deep .p-datepicker-trigger:enabled:hover {
+    background: #A51739;
+    border: 1px solid #A51739;
+  }
+}
+
+.profile {
+  .title {
+    font-weight: 600;
+    margin-top: 4rem;
+    margin-bottom: 1.6rem;
+  }
+  .space-line {
+    width: 6rem;
+    height: 0.17rem;
+    background-color: #AE1B3FFF;
+  }
+  .character-require {
+    color: #AE1C3F;
+  }
+  .field-upload {
+    /* Input/Default/Background */
+
+    background: #FFFFFF;
+    /* Input/Default */
+
+    box-shadow: 0px 1px 2px rgba(50, 50, 71, 0.08), 0px 0px 1px rgba(50, 50, 71, 0.2);
+    border-radius: 6px;
+    padding: toRem(9) toRem(16);
+    .txt-select {
+      font-size: toRem(13);
+      font-weight: 500;
+    }
+    .txt-file-info {
+      font-size: toRem(12);
+      font-style: italic;
+      .file-action {
+        a {
+          color: #425466;
+          .pi {
+            font-size: toRem(16);
+            cursor: pointer;
+          }
+        }
+
+      }
+    }
+    .btn-select-file {
+      label {
+        width: 100%;
+        background-color: #66CB9F;
+        color: white;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .show-img-area {
+    background: #E4ECF7;
+    border-radius: 0px 0px 2px 2px;
+  }
+  .invalid-upload {
+    border: 1px solid #f44336;
+  }
+  .btn-completed {
+    background-color: #66CB9F;
+    border-color: #66CB9F;
+  }
+}
+small {
+  font-size: toRem(11);
+}

@@ -1,0 +1,110 @@
+<div class="p-col-12 p-m-auto">
+    <h5 class="p-text-center p-my-5">BÁO CÁO THỐNG KÊ</h5>
+    <p-card>
+      <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+  
+      <div class="p-mb-5">
+        <div class="p-fluid">
+  
+          <div class="p-grid p-mb-3">
+            <div class="p-md-6 p-lg-6">
+              <p class="lb-space">Thông tin tìm kiếm</p>
+              <div class="space-line"></div>
+            </div>
+          </div>
+  
+          <div class="p-grid">
+            <div class="p-col-12 p-md-6 p-lg-6 p-d-flex p-align-center">
+              <span class="p-lg-3 p-md-3 p-col-12 p-text-bold">Thống kê theo thời gian:</span>
+              <div class="p-lg-9 p-md-9 p-col-12">
+                <p-calendar [(ngModel)]="rangeDates" selectionMode="range" (onSelect)="selectedRangeDates($event)" [readonlyInput]="true" inputId="range"></p-calendar>
+                <small *ngIf="errRangeDates !== ''" class="p-error">
+                  {{errRangeDates}}
+                </small>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-6 p-d-flex p-align-center">
+              <span class="p-lg-3 p-md-3 p-col-12 p-text-bold">Từ khóa tìm kiếm:</span>
+              <div class="p-lg-9 p-md-9 p-col-12">
+                <input [(ngModel)]="searchText" type="text" pInputText placeholder="Nhập từ khóa tìm kiếm"/>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-grid p-mt-2 border-line-search">
+            <div class="p-col-12 p-md-12 p-lg-12 p-d-flex action p-justify-center">
+              <button pButton type="button" (click)="onSearch()" label="Tìm kiếm" class="p-button-info p-mr-2"></button>
+            </div>
+          </div>
+  
+          <div class="p-grid p-mb-3 p-mt-2">
+            <div class="p-md-6 p-lg-6">
+              <p class="lb-space">Thống kê Bảo hiểm y tế</p>
+              <div class="space-line"></div>
+            </div>
+          </div>
+  
+          <div class="p-grid statistic-info">
+            <div class="p-col-12 p-md-4 p-lg-4">
+              <div class="summary p-d-flex p-flex-column p-justify-center">
+                <div class="title p-text-center p-mb-3">TỔNG</div>
+                <div class="count p-text-center">{{totalRaRecord}}</div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-8 p-lg-8">
+              <div class="p-d-flex p-flex-wrap count-by-status ra-w-100">
+                <div class="status-item status-item-mb" [ngClass]="currentStatusFocus.includes(Status.ACTIVE) ? 'status-active' : 'status-inactive'" (click)="onClickChangeStatus(Status.ACTIVE)">HOẠT ĐỘNG: {{countActive}}</div>
+                <div class="status-item status-item-mb status-inactive" [ngClass]="currentStatusFocus.includes(Status.PENDING) ? 'status-active' : 'status-inactive'" (click)="onClickChangeStatus(Status.PENDING)">TẠM DỪNG: {{countPending}}</div>
+                <div class="status-item status-inactive" [ngClass]="currentStatusFocus.includes(Status.EXPIRED) ? 'status-active' : 'status-inactive'" (click)="onClickChangeStatus(Status.EXPIRED)">HẾT HẠN: {{countExpired}}</div>
+                <div class="status-item status-inactive" [ngClass]="currentStatusFocus.includes(Status.EVICT) ? 'status-active' : 'status-inactive'" (click)="onClickChangeStatus(Status.EVICT)">THU HỒI: {{countEvict}}</div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-grid">
+            <div class="p-col-12 p-md-12 p-lg-12 p-d-flex action p-justify-end">
+              <button pButton type="button" icon="pi pi-file-excel" (click)="exportRa()" iconPos="left" label="Xuất file Excel" class="p-button-danger p-mr-2"></button>
+            </div>
+          </div>
+  
+        </div>
+  
+        <p-table [value]="insuranceListSearch" [rowsPerPageOptions]="[10,30,50]" [rows]="pageSize" [(first)]="pageIndex"
+                 styleClass="table-responsive custom-table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 3%;"></th>
+              <th style="width: 15%;">MÃ BẢO HIỂM Y TẾ</th>
+              <th style="width: 12%;">TÊN</th>
+              <th style="width: 10%;">ĐƠN VỊ ĐĂNG KÝ</th>
+              <th style="width: 8%;">TRẠNG THÁI</th>
+              <th style="width: 18%;">HIỆU LỰC</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-raInfo let-index="rowIndex">
+            <tr>
+              <td>
+                <span>{{(pageIndex * pageSize) + index + 1}}</span>
+              </td>
+              <td class="subject-id-column">{{raInfo.identityId}}</td>
+              <td class="subject-id-column">{{raInfo.name}}</td>
+              <td class="subject-id-column">{{raInfo.issuerName}}</td>
+              <td>
+                <agri-ra-status-display [status]="raInfo.status"></agri-ra-status-display>
+              </td>
+              <td>{{raInfo.validFrom | date: 'dd/MM/yyyy'}} - {{raInfo.validTo | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td [attr.colspan]="11">
+                Không có kết quả tìm kiếm. Vui lòng kiểm tra lại thông tin tìm kiếm!
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-paginator #p [rows]="pageSize" [totalRecords]="totalRecordPage" (onPageChange)="selectChangePage($event)" [rowsPerPageOptions]="[10,30,50]"></p-paginator>
+      </div>
+    </p-card>
+  </div>
+  

@@ -1,0 +1,3 @@
+p-inputmask.ng-touched.ng-invalid > .p-inputtext {
+    @include invalid-input();
+}

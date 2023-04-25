@@ -1,0 +1,153 @@
+<div class="p-grid">
+  <div class="p-lg-4 p-md-6 p-lg-offset-4 p-md-offset-3 p-col-12 p-offset-0">
+    <p-card>
+      <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+      <div class="p-p-3">
+        <div class="p-fluid p-grid">
+          <!-- <div class="p-col-12 p-d-flex p-justify-center">
+            <img src="assets/icons/ra_login.svg" alt="login">
+          </div> -->
+          <div class="p-col-12 p-d-flex p-justify-center">
+            <h3>Đăng ký tài khoản</h3>
+          </div>
+        </div>
+        <form class="p-fluid" [formGroup]="formRegister">
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="username">Tên đăng nhập</label>
+              <span class="p-input-icon-right">
+                <input id="username" formControlName="userName" type="text"
+                       [class.ng-invalid]="validateUserFromServer !== ''
+                       || hasErrorInput('userName', 'required')"pInputText placeholder="Nhập tên đăng nhập" />
+                <i class="pi pi-info-circle" (click)="op.toggle($event)"></i>
+              </span>
+              <small *ngIf="hasErrorInput('userName', 'required')" class="p-error">
+                Tên đăng nhập không được để trống
+              </small>
+              <small *ngIf="validateUserFromServer !== ''" class="p-error">
+                {{validateUserFromServer}}
+              </small>
+            </div>
+          </div>
+          <p-overlayPanel #op [style]="{width: '400px'}">
+            <ng-template pTemplate>
+              <div class="note-username">
+                <p class="title">Hướng dẫn</p>
+                <p class="content">Tên đăng nhập phải đăng ký với giá trị là số CCCD (không quá 50 ký tự).</p>
+                <p class="content">Ví dụ: 001201012182</p>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="password">Mật khẩu</label>
+              <span class="p-input-icon-right">
+                  <input formControlName="password" id="password" [type]="isShowPassword ? 'text' : 'password'" pInputText placeholder="Nhập mã bảo mật" />
+                  <i class="pi" [ngClass]="{'pi-eye-slash': isShowPassword, 'pi-eye': !isShowPassword}" (click)="toggleShowPass(posInputPass.PASSWORD)"></i>
+                </span>
+              <small *ngIf="hasErrorInput('password', 'required')" class="p-error">
+                Mã bảo mật không được bỏ trống
+              </small>
+              <small *ngIf="hasErrorInput('password', 'pattern')" class="p-error">
+                Mã bảo mật không hợp lệ
+              </small>
+            </div>
+          </div>
+
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="re-password">Nhập lại mật khẩu</label>
+              <span class="p-input-icon-right">
+                  <input formControlName="rePassword" id="rePassword" [type]="isShowRePassword ? 'text' : 'password'"
+                         pInputText placeholder="Nhập lại mã bảo mật"/>
+                  <i class="pi" [ngClass]="{'pi-eye-slash': isShowRePassword, 'pi-eye': !isShowRePassword}"
+                     (click)="toggleShowPass(posInputPass.RE_PASSWORD)"></i>
+              </span>
+              <small *ngIf="hasErrorInput('rePassword', 'required')" class="p-error">
+                Nhập lại mã bảo mật không được để trống<br>
+              </small>
+              <small *ngIf="hasErrorInput('rePassword', 'pattern')" class="p-error">
+                Nhập lại mã bảo mật không hợp lệ<br>
+              </small>
+              <small *ngIf="!hasErrorInput('rePassword', 'required')
+               && !hasErrorInput('rePassword', 'pattern') &&
+                formRegister.errors?.valueNotMatch.secondControlValue" class="p-error">
+                Nhập lại mã bảo mật không khớp<br>
+              </small>
+              <small>
+                (Yêu cầu mã bảo mật ít nhất 8 ký tự, bao gồm: chữ hoa, chữ thường, số và ký tự đặc biệt.)
+              </small>
+            </div>
+          </div>
+
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="email-address">Email</label>
+              <input id="email-address" formControlName="email" type="text"
+                     [class.ng-invalid]="validateEmailFromServer !== ''
+                      || hasErrorInput('email', 'required')
+                      || hasErrorInput('email', 'email')"
+                     pInputText placeholder="Nhập email của bạn" />
+              <small *ngIf="hasErrorInput('email', 'required')" class="p-error">
+                Email không được để trống
+              </small>
+              <small *ngIf="hasErrorInput('email', 'email')" class="p-error">
+                Email không đúng định dạng
+              </small>
+              <small *ngIf="validateEmailFromServer !== ''" class="p-error">
+                {{validateEmailFromServer}}
+              </small>
+            </div>
+          </div>
+
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="phone-number">Số điện thoại</label>
+              <input id="phone-number" formControlName="phoneNumber"
+                     [class.ng-invalid]="validatePhoneFromServer !== ''
+                      || hasErrorInput('phoneNumber', 'required')
+                      || hasErrorInput('phoneNumber', 'pattern')"
+                     type="text" pInputText placeholder="Nhập số điện thoại" />
+              <small *ngIf="hasErrorInput('phoneNumber', 'required')" class="p-error">
+                Số điện thoại không được để trống
+              </small>
+              <small *ngIf="hasErrorInput('phoneNumber', 'maxlength') || hasErrorInput('phoneNumber', 'pattern')" class="p-error">
+                Số điện thoại không đúng định dạng
+              </small>
+              <small *ngIf="validatePhoneFromServer !== ''" class="p-error">
+                {{validatePhoneFromServer}}
+              </small>
+            </div>
+          </div>
+
+        
+
+          <div class="p-grid">
+            <div class="p-col-12 p-field-checkbox">
+              <label for="binary">Bằng cách nhấp vào Đăng ký, bạn đồng ý với<a href = "https://dichvucong.gov.vn/p/home/dvc-dieu-khoan-su-dung.html">
+                Điều khoản, Chính sách chia sẻ thông tin</a> của chúng tôi</label>
+            </div>
+          </div>
+          <div class="p-fluid p-mb-2">
+            <small *ngIf="msgInvalidForm !== ''" class="p-error">
+              {{msgInvalidForm}}
+            </small>
+          </div>
+          <div class="p-grid">
+            <div class="p-col-12">
+              <button pButton type="button" label="Đăng ký" class="p-button-danger" (click)="register()"></button>
+            </div>
+
+            <div class="p-col-12 p-text-center">
+              <span>Bạn đã có tài khoản? <a routerLink="/auth/login">Đăng nhập</a></span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+
+

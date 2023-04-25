@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="status">
+  <ng-container *ngSwitchCase="statusConst.ACTIVE">Hoạt động</ng-container>
+  <ng-container *ngSwitchCase="statusConst.IN_ACTIVE">Không hoạt động</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EXPIRED">Hết hạn</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EVICT">Thu hồi</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PENDING">Chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PAUSE">Tạm dừng</ng-container>
+  <ng-container *ngSwitchCase="statusConst.REJECT">Từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.REGISTRY_PENDING">Đăng ký mới chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.REGISTRY_REJECT">Đăng ký mới từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.REGISTRY_EXPIRE">Đăng ký mới hết hạn</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PROVIDE_PENDING">Cấp mới chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PROVIDE_REJECT">Cấp mới từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PROVIDE_EXPIRE">Cấp mới hết hạn</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PAUSE_PENDING">Tạm dừng chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.PAUSE_REJECT">Tạm dừng từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EXTEND_PENDING">Gia hạn chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EXTEND_REJECT">Gia hạn từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EXTEND_EXPIRE">Gia hạn hết hạn</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EXTEND_ABLE">Được gia hạn</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EVICT_PENDING">Thu hồi chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.EVICT_REJECT">Thu hồi từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.RENEW_PENDING">Cấp lại chờ duyệt</ng-container>
+  <ng-container *ngSwitchCase="statusConst.RENEW_REJECT">Cấp lại từ chối</ng-container>
+  <ng-container *ngSwitchCase="statusConst.USER_CONFIRM_PENDING">Chờ người dùng xác nhận thông tin CTS</ng-container>
+</ng-container>

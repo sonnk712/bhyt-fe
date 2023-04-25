@@ -1,0 +1,26 @@
+@import './src/scss/layout/mixins';
+
+.frosearch {
+    display: flex;
+}
+
+.btnsearch {
+    color: #AE1C3F;
+    cursor: pointer;
+}
+
+.btntk {
+    margin-left: 7.5rem;
+}
+
+.btn-fresh{
+    margin-left: 1rem;
+}
+
+.tbl-col-action {
+  width: 8rem;
+}
+
+.item-selected {
+  color: #0288D1;
+}

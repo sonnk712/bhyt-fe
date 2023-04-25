@@ -1,0 +1,41 @@
+<div class="layout-wrapper layout-static" (click)="doLayoutClick()"
+     [ngClass]="{'layout-mobile-active': (staticMenuMobileActive$ | async),
+     'layout-static-inactive': (staticMenuDesktopInactive$ | async)}">
+
+  <div class="layout-main">
+    <div class="layout-topbar">
+      <a href="javascript:void('toggle-menu')" id="layout-menu-btn" class="menu-btn" (click)="doToggleMenuLeft()">
+        <i class="pi pi-bars"></i>
+      </a>
+      <div class="layout-topbar-menu-wrapper">
+        <ng-container *ngIf="(accountInfo$ | async) as account">
+          <button
+            type="button" pButton icon="pi pi-user" class="p-button-text btn-white"
+            [label]="account.username || ''"
+            (click)="menuUser.toggle($event)">
+          </button>&nbsp;
+        </ng-container>
+        <button type="button" pButton icon="pi pi-question-circle" label="" class="p-button-text btn-white" iconPos="right"></button>
+      </div>
+    </div>
+    <div class="layout-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="layout-main-mask"></div>
+  </div>
+
+  <div class="layout-sidebar" (click)="doMenuClick()">
+    <div class="layout-sidebar-logo">
+      <a routerLink="/">
+        <!-- <img src="assets/images/bhyt1.jpg" style="width: 88px margin-right;" alt="ra-admin" /> -->
+        <h1 style="color:aliceblue">SQA</h1>
+      </a>
+    </div>
+    <div class="layout-menu-container">
+      <ng-container *ngIf="(navList$ | async) as navList">
+        <agri-nav-bar [items]="navList"></agri-nav-bar>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<p-menu #menuUser [popup]="true" [model]="userItems"></p-menu>

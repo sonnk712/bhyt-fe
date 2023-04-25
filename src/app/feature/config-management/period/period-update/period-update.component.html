@@ -1,0 +1,92 @@
+<div class="p-lg-12 p-md-12 p-col-12 p-m-auto">
+    <h5 class="p-text-center p-my-5">SỬA ĐỔI THỜI HẠN</h5>
+    <p-card>
+      <form class="p-fluid" [formGroup]="formCreateCa">
+        <div class="p-grid p-mb-3">
+          <div class="p-md-6 p-lg-6">
+            <p>Thông tin thời hạn</p>
+            <div class="space-line"></div>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-fluid p-grid">
+              <div class="p-col-12 p-field">
+                <label for="period-code"><span class="character-require">* </span>Mã thời hạn</label>
+                <input id="period-code" formControlName="code" type="text" pInputText placeholder="Nhập mã đại lý" />
+                <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                  Mã thời hạn không được bỏ trống!
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-fluid p-grid">
+              <div class="p-col-12 p-field">
+                <label for="period-month"><span class="character-require">* </span>Số tháng</label>
+                <input id="period-month" formControlName="month" type="text" pInputText placeholder="Nhập số tháng" />
+                <small *ngIf="hasErrorInput('month', 'required')" class="p-error">
+                  Số tháng không được bỏ trống!
+                </small>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="p-grid">
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-fluid p-grid">
+              <div class="p-col-12 p-field">
+                <label for="period-name"><span class="character-require">* </span>Tên thời hạn</label>
+                <input id="period-name" formControlName="name" type="text" pInputText placeholder="Nhập tên đại lý" />
+                <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                  Tên đại lý không được bỏ trống
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-grid">
+              <div class="p-col-12 p-field">
+                <label for="verify-num"><span class="character-require">* </span>Trạng thái</label>
+                <p-dropdown formControlName="status" [options]="statusL" optionLabel="name" [showClear]="true"
+                  placeholder="Chọn trạng thái"></p-dropdown>
+                <small *ngIf="hasErrorInput('status', 'required')" class="p-error">
+                  Trạng thái không được bỏ trống
+                </small>
+              </div>
+            </div>
+          </div>
+           
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="period-createdDate"><span class="character-require">* </span>Ngày tạo</label>
+              <input readonly id="period-createdDate" formControlName="createdDate" type="text" pInputText />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="period-updatedDate"><span class="character-require">* </span>Ngày sửa đổi</label>
+              <input readonly id="period-updatedDate" formControlName="updatedDate" type="text" pInputText />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      </form>
+      <div class="p-mb-3 p-text-center">
+        <button pButton pRipple type="button" label="Lưu thông tin" class="p-button-info"
+          (click)="createCa()"></button>
+      </div>
+    </p-card>
+  </div>

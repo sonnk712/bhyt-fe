@@ -1,0 +1,120 @@
+<div class="p-col-12 p-m-auto">
+  <h5 class="p-text-center p-my-5">Thống kê doanh thu</h5>
+
+  <p-card>
+
+    <div class="p-mb-5">
+      <form class="p-fluid" [formGroup]="formSearch">
+        <div class="p-grid p-align-center p-align-baseline">
+          <span class="p-lg-1 p-md-2 p-col-16 ">Tìm kiếm</span>
+          <div class="p-lg-4 p-md-4 p-col-16">
+                        <span class="p-input-icon-right">
+                            <input formControlName="textSearch" type="text" pInputText
+                                   placeholder="Nhập từ khóa tìm kiếm"/>
+                        </span>
+          </div>
+          <div class="p-mb-3 btnsearch">
+                        <span (click)="isHidden = !isHidden; resetForm()">
+                          <i [ngClass]="isHidden ? 'pi pi-filter-slash' : 'pi pi-filter'"></i>
+                          <span> {{isHidden ? 'Thu gọn' : 'Tìm kiếm nâng cao'}} </span>
+                        </span>
+          </div>
+        </div>
+
+        <div class="p-grid p-align-center" *ngIf="isHidden">
+          <span class="p-lg-1 p-md-2 p-col-12 "></span>
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-fluid p-grid">
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Thời hạn</label>
+                <p-dropdown formControlName="periodList" [options]="periods" optionLabel="name" optionValue="month"
+                            [showClear]="true" placeholder="Chọn Thời hạn" (onChange)="getSearchProfileByPeriod()">
+                </p-dropdown>
+              </div>
+
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Đối tượng</label>
+                <p-dropdown formControlName="typeList" [options]="types" optionLabel="name" optionValue="id"
+                            [showClear]="true" placeholder="Chọn đối tượng " (onChange)="getSearchProfileByType()">
+                </p-dropdown>
+              </div>
+
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Trạng thái</label>
+                <p-dropdown formControlName="statusList" [options]="statusL" optionLabel="name" optionValue="id"
+                            [showClear]="true" placeholder="Chọn Trạng thái " (onChange)="getSearchProfileByStatus()">
+                </p-dropdown>
+              </div>
+
+              <!-- <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Đại lý quản lý</label>
+                <p-treeSelect placeholder="Chọn đại lý quản lý" formControlName="managementAgent"
+                              [options]="managentAgency">
+                </p-treeSelect>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="p-d-flex">
+        <div class="p-mb-3 p-lg-offset-1">
+          <button pButton pRipple type="button" label="Làm mới" class="p-button-info " (click)="resetForm()">
+            <i class="pi pi-refresh"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+     <p-table [value]="listProfileFromServer"              
+            [(selection)]="selected"
+            [paginator]="true"
+            [rows]="pageSize"
+            [(first)]="pageIndex"
+            [rowHover]="true"
+            dataKey="id"
+            styleClass="table-responsive custom-table"
+            responsiveLayout="scroll">
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 12%;">CCCD</th>
+            <th style="width: 15%;">Người thực hiện</th>
+            <th style="width: 15%;">Ngày thanh toán</th>
+            <th style="width: 20%;">Đối tượng thanh toán</th>
+            <th style="width: 12%;">Liên hệ</th>
+            <th style="width: 12%;">Trạng thái</th>
+            <th style="width: 28%;">Tổng tiền</th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-profileInf let-index="rowIndex">
+          <tr>
+            <td class="subject-id-column" [title]="profileInf.code">{{profileInf.cccd}}</td>
+            <td class="subject-id-column">{{profileInf.name}}</td>
+            <td class="subject-id-column">{{profileInf.paidDate}}</td>
+            <td class="subject-id-column">{{profileInf.type.name}}</td>
+            <td class="subject-id-column">{{profileInf.contact}}</td>
+            <td>{{profileInf.status ? 'Đã thanh toán' : 'Chưa thanh toán'}}</td>
+            <td class="subject-id-column">{{profileInf.cost}} VNĐ</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <tr>
+            <td colspan="6" style="text-align: left;">Tổng doanh thu: </td>
+            <td >{{ totalRevenue }} VNĐ</td>
+          </tr>
+        </ng-template>
+        
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="13">
+              Không có bản ghi nào được tìm thấy
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+  </p-card>
+
+</div>

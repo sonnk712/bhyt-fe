@@ -1,0 +1,139 @@
+<div class="p-col-12 p-m-auto">
+  <h5 class="p-text-center p-my-5">Quản lý đại lý</h5>
+
+  <p-card>
+
+    <div class="p-mb-5">
+      <form class="p-fluid" [formGroup]="formSearch">
+        <div class="p-grid p-align-center p-align-baseline">
+          <span class="p-lg-1 p-md-2 p-col-16 ">Tìm kiếm</span>
+          <div class="p-lg-4 p-md-4 p-col-16">
+                        <span class="p-input-icon-right">
+                            <input formControlName="textSearch" type="text" pInputText
+                                   placeholder="Nhập từ khóa tìm kiếm" (keydown.enter)="onSearch(keyword)"/>
+                        </span>
+          </div>
+          <div class="p-mb-3 btnsearch">
+                        <span (click)="isHidden = !isHidden; resetForm()">
+                          <i [ngClass]="isHidden ? 'pi pi-filter-slash' : 'pi pi-filter'"></i>
+                          <span> {{isHidden ? 'Thu gọn' : 'Tìm kiếm nâng cao'}} </span>
+                        </span>
+          </div>
+        </div>
+
+        <div class="p-grid p-align-center" *ngIf="isHidden">
+          <span class="p-lg-1 p-md-2 p-col-12 "></span>
+          <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-fluid p-grid">
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Tỉnh / Thành phố</label>
+                <p-dropdown formControlName="provinceList" [options]="cities" optionLabel="name"
+                            [showClear]="true" placeholder="Chọn Tỉnh / Thành phố" (onChange)="getDistrictFromCities()">
+                </p-dropdown>
+              </div>
+
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Quận / Huyện</label>
+                <p-dropdown formControlName="districtList" [options]="districts" optionLabel="name"
+                            [showClear]="true" placeholder="Chọn Quận / Huyện " (onChange)="getWardFromDistricts()">
+                </p-dropdown>
+              </div>
+
+              <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Phường / Xã</label>
+                <p-dropdown formControlName="wardList" [options]="wards" optionLabel="name"
+                            [showClear]="true" placeholder="Chọn Phường / Xã " (onChange)="getSearchAgency()">
+                </p-dropdown>
+              </div>
+              
+              <!-- <div class="p-col-4 p-field">
+                <label for="verify-num"><span class="character-require"> </span>Đại lý quản lý</label>
+                <p-treeSelect placeholder="Chọn đại lý quản lý" formControlName="managementAgent"
+                              [options]="managentAgency">
+                </p-treeSelect>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="p-d-flex">
+        <div class="p-mb-3 p-lg-offset-1">
+          <button pButton pRipple type="button" label="Làm mới" class="p-button-info " (click)="resetForm()">
+            <i class="pi pi-refresh"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+    <div class="p-mb-3 p-text-right">
+      <button pButton pRipple type="button" label="Thêm mới" class="p-button-success"
+              (click)="redirectToRegistryAgency()"></button>
+      <button pButton pRipple type="button" label="Xóa" class="p-button-danger" 
+        (click)="logDeleteRow()"><i class="pi pi-trash p-mr-2"></i></button>
+    </div>
+
+
+     <p-table [value]="listAgencyFromServer"              
+            [(selection)]="selected"
+            [paginator]="true"
+            [rows]="pageSize"
+            [(first)]="pageIndex"
+            [rowHover]="true"
+            dataKey="id"
+            styleClass="table-responsive custom-table"
+            responsiveLayout="scroll">
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5%"></th>
+            <th style="width: 8%;">Mã đại lý</th>
+            <th style="width: 18%;">Khối/Loại hình đại lý thu</th>
+            <th style="width: 10%;">Điểm thu</th>
+            <th style="width: 15%;">Họ và tên</th>
+            <th style="width: 12%;">Điện thoại liên hệ</th>
+            <th style="width: 12%;">Địa chỉ</th>
+            <th style="width: 9%;">Hoạt động</th>
+            <th style="width: 32%;">Thao tác</th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-agencyInf let-index="rowIndex">
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="agencyInf"></p-tableCheckbox>
+            </td>
+            <td class="subject-id-column" [title]="agencyInf.code">{{agencyInf.code}}</td>
+            <td class="subject-id-column">{{agencyInf.name}}</td>
+            <td class="subject-id-column">{{agencyInf.receivingPlace}}</td>
+            <td class="subject-id-column">{{agencyInf.person}}</td>
+            <td class="subject-id-column">{{agencyInf.phoneNumber}}</td>
+            <td class="subject-id-column">{{agencyInf.address}}</td>
+            <td>{{agencyInf.status ? 'Hoạt động' : 'Không hoạt động'}}</td>
+            <td>
+              <span class="pi pi-eye p-p-2 cur-pointer" pTooltip="Chi tiết"
+                                    (click)="nodeSelect(agencyInf.id)"></span>
+              <span class="pi pi-pencil p-p-2 cur-pointer" pTooltip="Chỉnh sửa"
+                                    (click)="redirectToUpdate(agencyInf.id)"></span>
+              <span class="pi pi-trash p-p-2 cur-pointer" pTooltip="Xóa"
+                                    (click)="deleteOne(agencyInf.id)"></span>        
+            </td>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="13">
+              Không có bản ghi nào được tìm thấy
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <p-confirmDialog #cd [style]="{width: '50vw'}" [baseZIndex]="10000">
+        <p-footer>
+            <button type="button" pButton icon="pi pi-times" label="Hủy" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Đồng ý" (click)="cd.accept()"></button>
+        </p-footer>
+    </p-confirmDialog>
+  </p-card>
+
+</div>

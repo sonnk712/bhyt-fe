@@ -1,0 +1,43 @@
+<div>
+  <input #inputFile class="p-d-none" [accept]="fileExtension" [multiple]="maxFiles > 1" type="file" (change)="onFileChange($event)" />
+  <div *ngIf="!disabled" class="p-col-12 p-d-flex p-align-center upload-box">
+    <span class="p-mr-5">Chọn file: </span>
+    <p-button (click)="inputFile.click()" label="Chọn tệp" styleClass="p-button-sm p-button-success p-mr-5"></p-button>
+    <span *ngIf="selectedFiles.length == 0" class="text-helper p-ml-6 p-text-italic">Không có tệp nào được chọn</span>
+  </div>
+  <div *ngIf="selectedFiles.length > 0" class="p-col-12 p-mt-1 list-file-container">
+    <ul class="list-file-selected">
+      <li *ngFor="let fileItem of selectedFiles; let i = index" class="p-d-flex">
+        <span>{{fileItem.name}}</span>
+        <div class="p-ml-auto p-d-inline-flex">
+          <a *ngIf="fileItem.canView" href="javascript:void('view file');" (click)="viewImage(fileItem.downloadUrl)">
+            <i class="pi pi-eye"></i>
+          </a>
+          <a *ngIf="fileItem.canDownload" [href]="fileItem.downloadUrl" [attr.target]="fileItem.downloadTarget">
+            <i class="p-ml-2 pi pi-cloud-download"></i>
+          </a>
+          <a *ngIf="fileItem.canRemove" href="javascript:void('remove file');" (click)="onRemove(i)">
+            <i class="p-ml-2 pi pi-times-circle"></i>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="errors.length > 0" class="p-col-12">
+    <ul class=list-file-error>
+      <li class="p-error" *ngFor="let err of errors">{{err}}</li>
+    </ul>
+  </div>
+</div>
+
+<p-galleria [value]="imagesShow" [(visible)]="isShowImage" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
+            [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000">
+  <ng-template pTemplate="item" let-item>
+    <img [src]="item.url" style="width: 100%; display: block;"/>
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+    <div class="p-grid p-nogutter p-justify-center">
+      <img [src]="item.url" style="display: block;"/>
+    </div>
+  </ng-template>
+</p-galleria>

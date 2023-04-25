@@ -1,0 +1,81 @@
+.space-line {
+    width: 6rem;
+    height: 0.17rem;
+    background-color: #0d89ec;
+  }
+  
+  .lb-space {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0d89ec;
+  }
+  
+  .statistic-info {
+    .summary {
+      width: 300px;
+      height: 200px;
+      border: 1px solid #0d89ec;
+      border-radius: 5px;
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #0d89ec;
+        width: 100%;
+        margin-bottom: 32px;
+      }
+      .count {
+        font-size: 32px;
+        font-weight: 700;
+        color: #0d89ec;
+        width: 100%;
+      }
+    }
+    .count-by-status {
+      justify-content: space-around;
+      padding: 5px 0px;
+      .status-item {
+        display: flex;
+        padding-left: 24px;
+        padding-right: 24px;
+        align-items: center;
+        font-weight: 700;
+        margin: auto 0px;
+        height: 70px;
+        width: calc(50% - 24px);
+        max-width: 50%;
+        border: 1px solid #0d89ec;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .status-item-mb {
+        margin-bottom: 40px;
+      }
+      .status-inactive {
+        color:#0d89ec;
+        background: #FFFFFF;
+      }
+      .status-active {
+        background: #0d89ec;
+        color:#FFFFFF;
+      }
+    }
+  }
+  
+  .ra-w-100 {
+    width: 100%;
+  }
+  
+  .action {
+    button {
+      width: 170px;
+    }
+  }
+  
+  .border-line-search {
+    border-bottom: 1px solid #ced4da;
+  }
+  
+  :host ::ng-deep .p-paginator {
+    justify-content: end;
+  }
+  

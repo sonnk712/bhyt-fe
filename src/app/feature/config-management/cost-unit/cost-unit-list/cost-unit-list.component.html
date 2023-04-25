@@ -1,0 +1,99 @@
+<div class="p-col-12 p-m-auto">
+    <h5 class="p-text-center p-my-5">DANH SÁCH TÍNH PHÍ</h5>
+  
+    <p-card>
+  
+      <div class="p-mb-5">
+        <form class="p-fluid" [formGroup]="formSearch">
+          <div class="p-grid p-align-center p-align-baseline">
+            <span class="p-lg-1 p-md-2 p-col-12 ">Tìm kiếm</span>
+            <div class="p-lg-4 p-md-4 p-col-12">
+                          <span class="p-input-icon-right">
+                              <input formControlName="textSearch" type="text" pInputText
+                                     placeholder="Nhập từ khóa tìm kiếm"/>
+                          </span>
+            </div>
+          </div>
+        </form>
+        <div class="p-d-flex">
+          <div class="p-mb-3 p-lg-offset-1">
+            <button pButton pRipple type="button" label="Làm mới" class="p-button-info " (click)="resetForm()">
+              <i class="pi pi-refresh"></i></button>
+          </div>
+        </div>
+      </div>
+  
+      <agri-loading-indicator [isLoading]="isShowLoading"></agri-loading-indicator>
+      <div class="p-mb-3 p-text-right">
+          <button pButton pRipple type="button" label="Thêm mới" class="p-button-success p-mr-2"
+                (click)="redirectToRegistryCa()"></button>
+          <button pButton pRipple type="button" label="Xóa" class="p-button-danger" 
+                (click)="logDeleteRow()"><i class="pi pi-trash p-mr-2"></i></button>
+      </div>
+  
+  
+      <p-table [value]="costUnitList"              
+            [(selection)]="selectedCostUnit"
+            [paginator]="true"
+            [rows]="pageSize"
+            [(first)]="pageIndex"
+            [rowHover]="true"
+            dataKey="id"
+            styleClass="table-responsive custom-table"
+            responsiveLayout="scroll">
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5%">
+              <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+          </th>
+            <th style="width: 20%;">Mã thời hạn</th>
+            <th style="width: 25%;">Tên thời hạn</th>
+            <th style="width: 12%;">Chi phí</th>
+            <th style="width: 12%;">Ngày tạo</th>
+            <th style="width: 12%;">Ngày chỉnh sửa</th>
+            <th style="width: 10%;">Hoạt động</th>
+            <th style="width: 10%;">Thao tác</th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-costUnitdInf let-index="rowIndex">
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="costUnitdInf"></p-tableCheckbox>
+            </td>
+            <td class="subject-column subject-id-column" [title]="costUnitdInf.code">{{costUnitdInf.code}}</td>
+            <td class="subject-column">{{costUnitdInf.name}}</td>
+            <td class="subject-column">{{costUnitdInf.cost}} VNĐ</td>
+            <td>{{costUnitdInf.createdDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{costUnitdInf.updatedDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{costUnitdInf.status ? 'Hoạt động' : 'Không hoạt động'}}</td>
+            <td>
+              <span class="pi pi-eye p-p-2 cur-pointer" pTooltip="Chi tiết"
+                                    (click)="nodeSelect(costUnitdInf.id)"></span>
+              <span class="pi pi-pencil p-p-2 cur-pointer" pTooltip="Chỉnh sửa"
+                                    (click)="redirectToUpdate(costUnitdInf.id)"></span>
+              <span class="pi pi-trash p-p-2 cur-pointer" pTooltip="Xóa"
+                                    (click)="deleteOne(costUnitdInf.id)"></span>        
+            </td>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="13">
+              Không có bản ghi nào được tìm thấy
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+        <p-confirmDialog #cd [style]="{width: '50vw'}" [baseZIndex]="10000">
+          <p-footer>
+              <button type="button" pButton icon="pi pi-times" label="Hủy" (click)="cd.reject()"></button>
+              <button type="button" pButton icon="pi pi-check" label="Đồng ý" (click)="cd.accept()"></button>
+          </p-footer>
+      </p-confirmDialog>
+    </p-card>
+  
+  </div>
+  

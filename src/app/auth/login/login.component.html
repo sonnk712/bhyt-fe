@@ -1,0 +1,64 @@
+<div class="login-panel">
+  <agri-loading-indicator [isLoading]="loading$ | async"></agri-loading-indicator>
+  <div class="p-fluid p-grid">
+    <div class="p-col-12 p-d-flex p-justify-center">
+      <h3>Đăng nhập</h3>
+    </div>
+
+    <div class="p-col-12 p-d-flex p-justify-center p-flex-column p-align-center p-mb-2">
+      <h4 class="text-primary p-mb-1">Bảo hiểm y tế</h4>
+      <span class="p-text-bold">Cổng đăng ký và quản lý bảo hiểm</span>
+    </div>
+  </div>
+  <form [formGroup]="formLogin">
+    <div class="p-fluid">
+      <div class="p-grid">
+        <div class="p-col-12 p-field">
+          <label for="username">Tên đăng nhập</label>
+          <div class="p-d-block">
+            <input formControlName="username" id="username" type="text" pInputText placeholder="Nhập tên đăng nhập"/>
+          </div>
+          <small *ngIf="hasErrorInput('username', 'required')" class="p-error">
+            Tên đăng nhập không được bỏ trống
+          </small>
+        </div>
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-field">
+          <label for="password">Mật khẩu</label>
+          <span class="p-input-icon-right">
+                  <input formControlName="password" id="password" [type]="isShowPassword ? 'text' : 'password'"
+                         pInputText placeholder="Nhập mật khẩu"/>
+                  <i class="pi" [ngClass]="{'pi-eye-slash': isShowPassword, 'pi-eye': !isShowPassword}"
+                     (click)="toggleShowPass()"></i>
+                </span>
+          <small *ngIf="hasErrorInput('password', 'required')" class="p-error">
+            Mật khẩu không được bỏ trống
+          </small>
+        </div>
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-6 p-field-checkbox">
+          <p-checkbox formControlName="saveLogin" [binary]="true" inputId="save-login"></p-checkbox>
+          <label for="save-login" class="text-smaller">Lưu thông tin đăng nhập</label>
+        </div>
+
+        <div class="p-col-6 p-text-right">
+          <a routerLink="/auth/forgot-password" class="text-smaller">Quên mật khẩu?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-12 p-text-center">
+        <button (click)="doLogin()" pButton type="button" label="Đăng nhập" class="p-button-danger"></button>
+      </div>
+
+      <div class="p-col-12 p-text-center">
+        <span>Bạn chưa có tài khoản? <a routerLink="/auth/registry">Đăng ký</a></span>
+      </div>
+    </div>
+  </form>
+</div>

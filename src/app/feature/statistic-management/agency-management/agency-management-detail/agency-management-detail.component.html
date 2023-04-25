@@ -1,0 +1,148 @@
+<div class="p-lg-12 p-md-12 p-col-12 p-m-auto">
+  <h5 class="p-text-center p-my-5">THÔNG TIN CHI TIẾT</h5>
+  <p-card>
+    <form class="p-fluid" [formGroup]="formCreateAgency">
+
+      <div class="p-grid p-mb-3">
+        <div class="p-md-6 p-lg-6">
+          <p>Thông tin đại lý</p>
+          <div class="space-line"></div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="code"><span class="character-require">* </span>Mã đại lý</label>
+              <input id="code" formControlName="code" type="text" pInputText placeholder="Nhập mã đại lý" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="name"><span class="character-require">* </span>Tên đại lý</label>
+              <input id="name" formControlName="name" type="text" pInputText placeholder="Nhập tên đại lý" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="receivingPlace"><span class="character-require">* </span>Điểm thu</label>
+              <input id="receivingPlace" formControlName="receivingPlace" type="text" pInputText placeholder="Nhập điểm thu" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="person"><span class="character-require">* </span>Tên người quản lý</label>
+              <input id="person" formControlName="person" type="text" pInputText placeholder="Nhập tên người quản lý" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+
+       
+      </div>
+
+      <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Tỉnh / Thành phố</label>
+              <input id="province" formControlName="province" type="text" pInputText placeholder="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Quận / Huyện</label>
+              <input id="district" formControlName="district" type="text" pInputText placeholder="" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="verify-num"><span class="character-require">* </span>Xã / Phường</label>
+              <input id="ward" formControlName="ward" type="text" pInputText placeholder="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="address"><span class="character-require">* </span>Địa chỉ cụ thể</label>
+              <input id="address" formControlName="address" type="text" pInputText placeholder="Nhập địa chỉ cụ thể" />
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="phoneNumber"><span class="character-require">* </span>Số điện thoại</label>
+              <input id="phoneNumber" formControlName="phoneNumber" type="text" pInputText placeholder="Nhập số điện thoại" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="status"><span class="character-require">* </span>Trạng thái</label>
+              <input id="status" formControlName="status" type="text" pInputText placeholder="Chọn trạng thái" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="createdDate"><span class="character-require">* </span>Ngày tạo</label>
+              <input id="createdDate" formControlName="createdDate" type="text" pInputText placeholder="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <div class="p-fluid p-grid">
+            <div class="p-col-12 p-field">
+              <label for="updatedDate"><span class="character-require">* </span>Ngày sửa đổi</label>
+              <input id="updatedDate" formControlName="updatedDate" type="text" pInputText placeholder="" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  
+  </p-card>
+</div>

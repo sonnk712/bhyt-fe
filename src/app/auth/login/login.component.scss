@@ -1,0 +1,17 @@
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: aliceblue;
+  .login-panel {
+    max-width: 555px;
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    position: relative;
+    border-radius: 8px;
+  }
+  .p-toast {
+    top: 1.5rem;
+  }
+}

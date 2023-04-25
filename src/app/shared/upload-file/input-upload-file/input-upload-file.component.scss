@@ -1,0 +1,30 @@
+.upload-box {
+  border: 1px solid rgba(50, 50, 71, 0.08);
+  border-radius: 6px;
+}
+
+.text-helper {
+  font-size: 0.8rem;
+}
+
+.list-file-container {
+  border: 1px solid rgba(50, 50, 71, 0.08);
+  border-radius: 6px;
+  background-color: #E4ECF7;
+}
+
+.list-file-selected, .list-file-error {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list-file-selected a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.list-file-selected i {
+  font-size: 1.2rem;
+}

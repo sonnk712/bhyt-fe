@@ -1,0 +1,32 @@
+image: docker:19.03.12
+services:
+  - docker:19.03.12-dind 
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - echo "--------------Sampe CI CD-----------------"
+  - docker info
+
+build:
+  stage: build
+  script:
+    - docker build -t image.ra-admin-ui:dev .
+    - docker tag image.ra-admin-ui:dev savisdockerhub/image.ra-admin-ui:dev-1.0.1
+    - docker login -u "savisdockerhub" -p "628cea50-95fe-4383-bafe-efac4357d981" docker.io
+    - docker push docker.io/savisdockerhub/image.ra-admin-ui:dev-1.0.1
+  only:
+    - development
+
+deploy:
+  stage: deploy
+  script:
+    # - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS" docker.io
+    # - docker pull docker.io/savisdockerhub/image.ra-admin-ui:dev-1.0.0
+    - if [ "$(docker ps -a | grep container.ra-admin-ui)" ]; then docker stop container.ra-admin-ui; fi
+    - if [ "$(docker ps -a | grep container.ra-admin-ui)" ]; then docker rm container.ra-admin-ui; fi
+    - docker run -d --restart unless-stopped --name container.docverify-ui -p 8233:80 savisdockerhub/image.ra-admin-ui:dev-1.0.0
+  only:
+    - development

@@ -1,0 +1,29 @@
+<div>
+  <input #inputFile class="p-d-none" [accept]="fileExtension" [multiple]="maxFiles > 1" type="file" (change)="onFileChange($event)" />
+  <div *ngIf="!disabled" class="p-col-12 p-d-flex p-align-center upload-box">
+    <p-button (click)="inputFile.click()" label="Chọn tệp" icon="pi pi-upload" styleClass="p-button-outlined p-button-success button-upload p-mr-5"></p-button>
+  </div>
+  <div *ngIf="selectedFiles.length > 0" class="p-col-12 p-mt-1 list-file-container">
+    <ul class="list-file-selected">
+      <li *ngFor="let fileItem of selectedFiles; let i = index" class="p-d-flex">
+        <span>{{fileItem.name}}</span>
+        <div class="p-ml-auto p-d-inline-flex">
+          <a *ngIf="fileItem.canView" href="javascript:void('view file');">
+            <i class="pi pi-eye"></i>
+          </a>
+          <a *ngIf="fileItem.canDownload" [href]="fileItem.downloadUrl" [attr.target]="fileItem.downloadTarget">
+            <i class="p-ml-2 pi pi-cloud-download"></i>
+          </a>
+          <a *ngIf="fileItem.canRemove" href="javascript:void('remove file');" (click)="onRemove(i)">
+            <i class="p-ml-2 pi pi-times-circle"></i>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="errors.length > 0" class="p-col-12">
+    <ul class=list-file-error>
+      <li class="p-error" *ngFor="let err of errors">{{err}}</li>
+    </ul>
+  </div>
+</div>
